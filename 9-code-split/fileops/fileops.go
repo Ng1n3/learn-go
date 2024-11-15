@@ -8,6 +8,8 @@ import (
 )
 
 
+const accountBalanceFile = "balance.txt"
+
 func GetFloatFromFile(fileName string) (float64, error) {
 	data, err := os.ReadFile(fileName)
 
