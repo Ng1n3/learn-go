@@ -26,7 +26,7 @@ func main() {
   //   createdAt: time.Now(),
   // }
   // appUser = User{}
-  
+
   appUser = User{
     userFirstName,
     userLastName,
@@ -36,7 +36,11 @@ func main() {
 
   // ... do something awesome with that generated data!
 
-  fmt.Println(firstName, lastName, birthdate)
+  outputUserDetails(appUser)
+}
+
+func outputUserDetails(user User) {
+  fmt.Println(user.firstName, user.lastName, user.birthDate)
 }
 
 func getUserData(prompText string) string {
