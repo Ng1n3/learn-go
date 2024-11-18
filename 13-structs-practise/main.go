@@ -7,7 +7,12 @@ import (
 	"strings"
 
 	"example.com/note/note"
+	"example.com/note/todo"
 )
+
+type saver interface {
+	Save() error
+}
 
 func getNoteData() (string, string) {
 	title := getUserInput("Note title: ")
@@ -17,25 +22,60 @@ func getNoteData() (string, string) {
 
 func main() {
 	title, content := getNoteData()
+	todoText := getUserInput("Todo text: ")
+
+	todo, err := todo.New(todoText)
+	
+	if err != nil {
+		fmt.Println("Error: ", err)
+		return
+	}
+
+	todo.Display()
+	err = saveData(todo)
+	if err != nil {
+		return 
+	}
+
+	// err = todo.Save()
+	// if err != nil {
+	// 	fmt.Println("Saving the failed failed.")
+	// 	return
+	// }
+  // fmt.Println("Saving the todo succeded")
 
 	userNote, err := note.New(title, content)
-
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return
 	}
 
 	userNote.Display()
-
-	err = userNote.Save()
-
+	err = saveData(userNote)
 	if err != nil {
-		fmt.Println("Saving the note failed.")
 		return
 	}
 
-  fmt.Println("Saving the note succeded")
+	// err = userNote.Save()
+	// if err != nil {
+	// 	fmt.Println("Saving the note failed.")
+	// 	return
+	// }
+  // fmt.Println("Saving the note succeded")
 
+
+}
+
+func saveData(data saver) error {
+	err := data.Save()
+
+	if err != nil {
+		fmt.Println("Saving the note failed.")
+		return err
+	}
+
+  fmt.Println("Saving the note succeded")
+	return nil
 }
 
 func getUserInput(prompt string) string {
