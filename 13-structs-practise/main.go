@@ -87,6 +87,25 @@ func outputData(data outputtable) error {
 	return saveData(data)
 }
 
+func printSomething(value interface {}) {
+	intVal, ok := value.(int)
+
+	if ok {
+		fmt.Println("Integer:", intVal)
+		return
+	}
+
+	floatVal, ok := value.(float64)
+	if ok {
+		fmt.Println("Float:", floatVal)
+	}
+
+	stringVal, ok := value.(string)
+	if ok {
+		fmt.Println("String:", stringVal)
+	}
+}
+
 func saveData(data saver) error {
 	err := data.Save()
 
