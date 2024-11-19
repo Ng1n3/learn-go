@@ -19,7 +19,7 @@ type saver interface {
 // }
 
 type outputtable interface {
-	saver 
+	saver
 	Display()
 }
 
@@ -39,7 +39,7 @@ func main() {
 	todoText := getUserInput("Todo text: ")
 
 	todo, err := todo.New(todoText)
-	
+
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return
@@ -49,7 +49,7 @@ func main() {
 	// err = saveData(todo)
 	err = outputData(todo)
 	if err != nil {
-		return 
+		return
 	}
 
 	// err = todo.Save()
@@ -57,7 +57,7 @@ func main() {
 	// 	fmt.Println("Saving the failed failed.")
 	// 	return
 	// }
-  // fmt.Println("Saving the todo succeded")
+	// fmt.Println("Saving the todo succeded")
 
 	userNote, err := note.New(title, content)
 	if err != nil {
@@ -77,9 +77,11 @@ func main() {
 	// 	fmt.Println("Saving the note failed.")
 	// 	return
 	// }
-  // fmt.Println("Saving the note succeded")
+	// fmt.Println("Saving the note succeded")
 
 
+	result := add2(1, 5)
+	fmt.Println(result)
 }
 
 func outputData(data outputtable) error {
@@ -87,7 +89,7 @@ func outputData(data outputtable) error {
 	return saveData(data)
 }
 
-func printSomething(value interface {}) {
+func printSomething(value interface{}) {
 	intVal, ok := value.(int)
 
 	if ok {
@@ -106,6 +108,20 @@ func printSomething(value interface {}) {
 	}
 }
 
+func add(a, b interface{}) interface{} {
+	aInt, aIsInt := a.(int)
+	bInt, bIsInt := b.(int)
+
+	if aIsInt && bIsInt {
+		return aInt + bInt
+	}
+	return nil
+}
+
+func add2[T int | float64 | string](a, b T) T {
+	return a + b
+}
+
 func saveData(data saver) error {
 	err := data.Save()
 
@@ -114,7 +130,7 @@ func saveData(data saver) error {
 		return err
 	}
 
-  fmt.Println("Saving the note succeded")
+	fmt.Println("Saving the note succeded")
 	return nil
 }
 
