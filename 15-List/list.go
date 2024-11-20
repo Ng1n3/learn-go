@@ -32,4 +32,9 @@ func main() {
   prices = append(prices, 5.99)
   prices = prices[1:]
   fmt.Println(prices)
+
+  discountPrices := []float64{101.5, 29.5, 22.6}
+
+  prices = append(prices, discountPrices...)
+  fmt.Println(prices)
 }
