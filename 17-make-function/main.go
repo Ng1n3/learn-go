@@ -25,5 +25,15 @@ func main() {
   courseRating["node"] = 4.9
 
   courseRating.output()
-  fmt.Println(courseRating)
+  // fmt.Println(courseRating)
+
+  for index, value := range userNames {
+    fmt.Println("Index:", index)
+    fmt.Println("Value:", value)
+  }
+
+  for key, value := range courseRating {
+    fmt.Println("Key:", key)
+    fmt.Println("Value:", value)
+  }
 }
