@@ -28,6 +28,10 @@ func main() {
 
 	newList := []Product{{Id: "adfads124", Title: "Effective Go", Price: 60.0}, {Id: "dafda23r3", Title: "Mastering Go", Price: 45.0}}
 	fmt.Println(newList)
+
+	newList = append(newList, Product{Id: "dafdssafd", Title: "Welcome to Go", Price: 70.0})
+
+  fmt.Println(newList)
 }
 
 // Time to practice what you learned!
